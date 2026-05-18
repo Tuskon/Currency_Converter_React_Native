@@ -1,12 +1,18 @@
 import Styled from 'styled-components/native';
 
-export const GeralView = Styled.View`
+export const GeralView = Styled.SafeAreaView`
   flex: 1;
-  justify-content: center;
-  align-items: center;
+`
+
+export const GeralContentView = Styled.ScrollView`
 `;
 
 export const Text = Styled.Text`
+  font-size: 18px;
+  color: #000;
+`;
+
+export const NameCountrys = Styled.Text`
   font-size: 18px;
   color: #000;
 `;

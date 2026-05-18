@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { CurrencyValueRequest } from "./models/currencyValue.models";
-import { Get } from "../../utils/requests_http";
+import { Get } from "@utils/requests_http";
 
 export const currencyValueRequest = createAsyncThunk('get-currency',
   async (data: CurrencyValueRequest, thunkAPI) => {

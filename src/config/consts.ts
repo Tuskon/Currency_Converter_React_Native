@@ -1,3 +1,5 @@
+import {API_URL_COUNTRYS, API_URL_CURRENCYS} from '@env';
 
 
-export const API_URL = ""
+export const API_COUNTRYS = API_URL_COUNTRYS
+export const API_CURRENCYS = API_URL_CURRENCYS
