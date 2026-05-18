@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "android": "react-native run-android --port 8081",
+    "ios": "react-native run-ios --port 8081",
     "lint": "eslint .",
     "start": "react-native start --reset-cache",
     "test": "jest"
@@ -17,6 +17,7 @@
     "axios": "^1.16.1",
     "react": "19.2.3",
     "react-native": "0.85.2",
+    "react-native-linear-gradient": "^2.8.3",
     "react-native-safe-area-context": "^5.7.0",
     "react-native-screens": "^4.25.0",
     "react-redux": "^9.3.0",

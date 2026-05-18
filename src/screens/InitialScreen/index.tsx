@@ -1,34 +1,41 @@
 import * as React from 'react';
-import { GeralView, GeralContentView, Text, NameCountrys } from './style';
-import { ActivityIndicator, Button } from 'react-native';
+import {
+    GeralView,
+    GeralContentView,
+    TitleView,
+    TitleText,
+    TitleSloganText,
+    ImageConvy,
+    ButtonView,
+    Button,
+    ButtonText
+} from './style';
+import { ActivityIndicator, TouchableOpacity } from 'react-native';
 import { useInitialScreenViewModel } from './intial.vm';
 
 export function InitialScreen() {
-
     const {
         goConverter,
         getList,
         loading,
-        listCountrys } = useInitialScreenViewModel()
+        listCountrys,
+    } = useInitialScreenViewModel();
 
     return (
         <GeralView>
-            <GeralContentView contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Initial Screen</Text>
-                <Button title="Next Screen" onPress={() => goConverter()}></Button>
-                <Button title="Made Request" onPress={() => getList()}></Button>
-
-                {
-                    loading &&
-                    <ActivityIndicator size={20} />
-                }
-
-                {listCountrys !== null && listCountrys?.length > 0 && listCountrys?.map((item, index) => (
-
-                    <NameCountrys key={index}>{item.name.common}</NameCountrys>
-                ))}
-
-
+            <GeralContentView edges={['top', 'bottom']}>
+                <TitleView>
+                    <TitleText>Welcome to ConvY</TitleText>
+                    <TitleSloganText>"Simple is enough"</TitleSloganText>
+                </TitleView>
+                <ImageConvy source={require('../../../assets/img/convy.png')} />
+                <ButtonView>
+                    <TouchableOpacity onPress={()=> goConverter()}>
+                        <Button>
+                            <ButtonText>Start Converter</ButtonText>
+                        </Button>
+                    </TouchableOpacity>
+                </ButtonView>
             </GeralContentView>
         </GeralView>
     );
