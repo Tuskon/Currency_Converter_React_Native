@@ -2,8 +2,20 @@
   "extends": "@react-native/typescript-config",
   "compilerOptions": {
     "types": ["jest"],
-    "jsx": "react-native"
+    "jsx": "react-native",
+    "baseUrl": ".",
+    "paths": {
+      "@contexts/*": ["src/contexts/*"],
+      "@redux": ["src/redux/index"],
+      "@redux/*": ["src/redux/*"],
+      "@shared/*": ["src/shared/*"],
+      "@screens/*": ["src/screens/*"],
+      "@models/*": ["src/models/*"],
+      "@navigation/*": ["src/navigation/*"],
+      "@config/*": ["src/config/*"],
+      "@utils/*": ["src/utils/*"]
+    }
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx","env.d.ts"],
   "exclude": ["**/node_modules", "**/Pods"]
 }

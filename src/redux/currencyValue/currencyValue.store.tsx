@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { currencyValueRequest } from './currencyValue.action';
 import { CurrencyValueInteface } from './models/currencyValue.models';
-import { StatusRequestEnum } from '../../models/requests-props';
+import { StatusRequestEnum } from '@models/requests-props';
 
 export interface CurrencyValueRequestReducer {
     requestStates: StatusRequestEnum,

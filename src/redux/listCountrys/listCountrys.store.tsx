@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { listCountrysRequest } from './listCountrys.action';
-import { StatusRequestEnum } from '../../models/requests-props';
+import { StatusRequestEnum } from '@models/requests-props';
 import { ListCountryInteface } from './models/listCountrys.models';
 
 export interface ListCountrysRequestReducer {

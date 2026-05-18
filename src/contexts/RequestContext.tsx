@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { StatusRequestEnum } from "../models/requests-props";
+import { StatusRequestEnum } from "@models/requests-props";
 
 interface RequestContextProps {
   loading: boolean;
