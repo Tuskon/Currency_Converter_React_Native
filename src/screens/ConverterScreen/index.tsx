@@ -3,10 +3,31 @@ import {
     GeralView,
     GeralContentView,
     ScrollContent,
-    Text
+    EmptySelectionCountryText,
+    TitleView,
+    TitleText,
+    TitleSloganText,
+    CardSelectionView,
+    InnerCardSelectionView,
+    LineRowView,
+    Line,
+    Circle,
+    ViewAmout,
+    AmountTitleText,
+    RowView,
+    SelectionRowView,
+    CircleCountryView,
+    SelectionCountryTextView,
+    SelectionCountryText,
+    InputRowView,
+    TextInputCountry,
+    ExchangeView,
+    ExchangeText,
+    ExchangeBoldText
 } from './style';
 import { useConverterScreenViewModel } from './converter.vm';
-import { ActivityIndicator, Button, View } from 'react-native';
+import { ActivityIndicator, Button, TouchableOpacity, View } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export function ConverterScreen() {
 
@@ -27,22 +48,80 @@ export function ConverterScreen() {
                     }}
                     showsVerticalScrollIndicator={false}
                 >
-                    <Text>Converter Screen</Text>
-                    <Button title='Go Back' onPress={() => goInitial()}></Button>
+                    <TitleView>
+                        <TitleText>Currency Converter</TitleText>
+                        <TitleSloganText>Check live rates, set rate alerts, receive notifications and more.</TitleSloganText>
+                    </TitleView>
 
-                    <View style={{ marginTop: 10 }}>
-                        <Button title='Made Request' onPress={() => getList()}></Button>
-                    </View>
+                    <CardSelectionView>
+                        <InnerCardSelectionView>
+                            {true ?
+                                <ViewAmout marginBottom={20}>
+                                    <AmountTitleText>Amount</AmountTitleText>
+                                    <RowView>
+                                        <TouchableOpacity>
+                                            <SelectionRowView>
+                                                <CircleCountryView />
+                                                <SelectionCountryTextView>
+                                                    <SelectionCountryText>DDD</SelectionCountryText>
+                                                    <MaterialIcons name='keyboard-arrow-down' size={25} color={'#3C3C3C'} />
+                                                </SelectionCountryTextView>
+                                            </SelectionRowView>
+                                        </TouchableOpacity>
 
-                    {loading &&
-                        <ActivityIndicator size={30} style={{ marginTop: 10 }} />
-                    }
+                                        <InputRowView>
+                                            <TextInputCountry></TextInputCountry>
+                                        </InputRowView>
+                                    </RowView>
+                                </ViewAmout>
+                                :
+                                <TouchableOpacity>
+                                    <EmptySelectionCountryText marginBottom={20}>Select First Country</EmptySelectionCountryText>
+                                </TouchableOpacity>
+                            }
 
-                    {listCountrys && !loading && listCountrys.length > 0 &&
-                        listCountrys.map((item, index) => (
-                            <Text key={index}>{item.name.common}</Text>
-                        ))
-                    }
+                            <LineRowView>
+                                <Line />
+                                <Circle>
+                                    <MaterialIcons name='swap-vert' size={25} color={'white'} />
+                                </Circle>
+                                <Line />
+                            </LineRowView>
+
+                            {true ?
+                                <ViewAmout marginTop={20}>
+                                    <AmountTitleText>Converted Amount</AmountTitleText>
+                                    <RowView>
+                                        <TouchableOpacity>
+                                            <SelectionRowView>
+                                                <CircleCountryView />
+                                                <SelectionCountryTextView>
+                                                    <SelectionCountryText>DDD</SelectionCountryText>
+                                                    <MaterialIcons name='keyboard-arrow-down' size={25} color={'#3C3C3C'} />
+                                                </SelectionCountryTextView>
+                                            </SelectionRowView>
+                                        </TouchableOpacity>
+
+                                        <InputRowView>
+                                            <TextInputCountry></TextInputCountry>
+                                        </InputRowView>
+
+                                    </RowView>
+                                </ViewAmout>
+                                :
+                                <TouchableOpacity>
+                                    <EmptySelectionCountryText marginTop={20}>Select Second Country</EmptySelectionCountryText>
+                                </TouchableOpacity>
+                            }
+
+                        </InnerCardSelectionView>
+                    </CardSelectionView>
+
+                    <ExchangeView>
+                        <ExchangeText>Indicative Exchange Rate</ExchangeText>
+                        <ExchangeBoldText>1 DDD = 1.36 DDD</ExchangeBoldText>
+                    </ExchangeView>
+
                 </ScrollContent>
             </GeralContentView>
         </GeralView>
