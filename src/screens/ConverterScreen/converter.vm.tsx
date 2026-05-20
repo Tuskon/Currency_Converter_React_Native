@@ -7,45 +7,49 @@ import { useAppDispatch } from '@redux';
 import { listCountrysRequest } from '@redux/listCountrys/listCountrys.action';
 import { resetGetListCountrysRequest } from '@redux/listCountrys/listCountrys.store';
 import { ListCountryInteface } from '@redux/listCountrys/models/listCountrys.models';
+import { Country } from '@models/country';
 
 export const useConverterScreenViewModel = () => {
-  const dispatch = useAppDispatch();
-  const navigation = useNavigation<any>();
-  const { handlerReducer } = useContext(RequestContext)
-  const GetListCountrysRequestReducer = useSelector((state: RootState) => state.getListCountrysRequest);
-  const [listCountrys, setListCountrys] = useState<ListCountryInteface[] | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
+  const [isVisibleCountryList, setIsVisibleCountryList] = useState<boolean>(false)
+  const [isForFirstCountry, setIsForFirstCountry] = useState<boolean | null>(null)
+  const [firstCountry, setFirstCountry] = useState<Country | null>(null)
+  const [secondCountry, setSecondCountry] = useState<Country | null>(null)
 
-  const goInitial = () => {
-    navigation.goBack()
+
+  const showList = (fisrtList: boolean) => {
+    setIsVisibleCountryList(true)
+    setIsForFirstCountry(fisrtList)
   }
 
-  const getList = () => {
-    dispatch(listCountrysRequest({}))
-    setLoading(true)
+  const setItems = (items: any) => {
+    let data = {
+      name: items.name,
+      currencies: Object.keys(items.currencies)[0],
+      flagPng: items.flagPng
+    }
+    if (isForFirstCountry) {
+      setFirstCountry(data)
+      setIsVisibleCountryList(false)
+      setIsForFirstCountry(null)
+    } else {
+      setSecondCountry(data)
+      setIsVisibleCountryList(false)
+      setIsForFirstCountry(null)
+    }
   }
 
-  useEffect(() => {
-    handlerReducer(
-      GetListCountrysRequestReducer,
-      (response) => {
-        setListCountrys(response)
-        console.log(response)
-        setLoading(false)
-        dispatch(resetGetListCountrysRequest());
-      },
-      (statusCode, errorMessage) => {
-        console.log(errorMessage)
-        setLoading(false)
-        dispatch(resetGetListCountrysRequest());
-      }, () => { }, false
-    );
-  }, [GetListCountrysRequestReducer]);
+  const closeList = () => {
+    setIsVisibleCountryList(false)
+    setIsForFirstCountry(null)
+  }
 
   return {
-    goInitial,
-    getList,
-    listCountrys,
-    loading
+    isVisibleCountryList,
+    setIsVisibleCountryList,
+    showList,
+    closeList,
+    setItems,
+    firstCountry,
+    secondCountry
   };
 };
