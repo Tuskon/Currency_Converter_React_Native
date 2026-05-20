@@ -32,7 +32,6 @@ export const ScrollContent = Styled.ScrollView`
   flex: 1;
 `;
 
-
 export const TitleView = Styled.View`
   width:${width * 0.8}px;
   margin-top:${height * 0.08}px;
@@ -124,12 +123,11 @@ export const SelectionRowView = Styled.View`
   flex-direction:row
 `
 
-export const CircleCountryView = Styled.View`
+export const CountryFlag = Styled.Image`
   width:38px;
   height:38px;
-  background-color:gray;
-  border-radius:100px;
-`
+  border-radius:19px;
+`;
 
 export const SelectionCountryTextView = Styled.View`
   justify-conten:center;

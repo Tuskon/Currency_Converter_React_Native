@@ -16,7 +16,7 @@ import {
     AmountTitleText,
     RowView,
     SelectionRowView,
-    CircleCountryView,
+    CountryFlag,
     SelectionCountryTextView,
     SelectionCountryText,
     InputRowView,
@@ -28,13 +28,16 @@ import {
 import { useConverterScreenViewModel } from './converter.vm';
 import { ActivityIndicator, Button, TouchableOpacity, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { CountryBottomSheet } from '@shared/CountryBottomSheet';
 
 export function ConverterScreen() {
 
-    const { goInitial,
-        getList,
-        listCountrys,
-        loading
+    const { isVisibleCountryList,
+        showList,
+        closeList,
+        setItems,
+        firstCountry,
+        secondCountry
     } = useConverterScreenViewModel()
 
     return (
@@ -55,27 +58,27 @@ export function ConverterScreen() {
 
                     <CardSelectionView>
                         <InnerCardSelectionView>
-                            {true ?
+                            {firstCountry !== null ?
                                 <ViewAmout marginBottom={20}>
                                     <AmountTitleText>Amount</AmountTitleText>
                                     <RowView>
-                                        <TouchableOpacity>
+                                        <TouchableOpacity onPress={() => showList(true)}>
                                             <SelectionRowView>
-                                                <CircleCountryView />
+                                                <CountryFlag source={{ uri: firstCountry.flagPng }} />
                                                 <SelectionCountryTextView>
-                                                    <SelectionCountryText>DDD</SelectionCountryText>
+                                                    <SelectionCountryText>{firstCountry.currencies}</SelectionCountryText>
                                                     <MaterialIcons name='keyboard-arrow-down' size={25} color={'#3C3C3C'} />
                                                 </SelectionCountryTextView>
                                             </SelectionRowView>
                                         </TouchableOpacity>
 
                                         <InputRowView>
-                                            <TextInputCountry></TextInputCountry>
+                                            <TextInputCountry placeholder={"0.00"}></TextInputCountry>
                                         </InputRowView>
                                     </RowView>
                                 </ViewAmout>
                                 :
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={() => showList(true)}>
                                     <EmptySelectionCountryText marginBottom={20}>Select First Country</EmptySelectionCountryText>
                                 </TouchableOpacity>
                             }
@@ -88,28 +91,28 @@ export function ConverterScreen() {
                                 <Line />
                             </LineRowView>
 
-                            {true ?
+                            {secondCountry !== null ?
                                 <ViewAmout marginTop={20}>
                                     <AmountTitleText>Converted Amount</AmountTitleText>
                                     <RowView>
-                                        <TouchableOpacity>
+                                        <TouchableOpacity onPress={() => showList(false)}>
                                             <SelectionRowView>
-                                                <CircleCountryView />
+                                                <CountryFlag source={{ uri: secondCountry.flagPng }} />
                                                 <SelectionCountryTextView>
-                                                    <SelectionCountryText>DDD</SelectionCountryText>
+                                                    <SelectionCountryText>{secondCountry.currencies}</SelectionCountryText>
                                                     <MaterialIcons name='keyboard-arrow-down' size={25} color={'#3C3C3C'} />
                                                 </SelectionCountryTextView>
                                             </SelectionRowView>
                                         </TouchableOpacity>
 
                                         <InputRowView>
-                                            <TextInputCountry></TextInputCountry>
+                                            <TextInputCountry placeholder={"0.00"}></TextInputCountry>
                                         </InputRowView>
 
                                     </RowView>
                                 </ViewAmout>
                                 :
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={() => showList(false)}>
                                     <EmptySelectionCountryText marginTop={20}>Select Second Country</EmptySelectionCountryText>
                                 </TouchableOpacity>
                             }
@@ -124,6 +127,8 @@ export function ConverterScreen() {
 
                 </ScrollContent>
             </GeralContentView>
+            <CountryBottomSheet visible={isVisibleCountryList} onClose={() => closeList()} onCountrySelected={(item) => setItems(item)} />
         </GeralView>
+
     );
 }
