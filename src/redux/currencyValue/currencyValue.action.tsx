@@ -5,7 +5,7 @@ import { Get } from "@utils/requests_http";
 export const currencyValueRequest = createAsyncThunk('get-currency',
   async (data: CurrencyValueRequest, thunkAPI) => {
     try {
-      let response = await Get(`api/${data.firstCountry}/${data.secondCountry}.json`, data);
+      let response = await Get(`api/${data.firstCountry}/${data.secondCountry}.json`, data, false);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue({

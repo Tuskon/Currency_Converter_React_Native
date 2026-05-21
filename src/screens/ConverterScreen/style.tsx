@@ -158,6 +158,10 @@ export const ExchangeView = Styled.View`
   margin-top:${height * 0.04}px;
   align-items:flex-start;
 `
+export const ExchangeRow = Styled.View`
+  flex-direction:row;
+  align-items:center;
+`
 
 export const ExchangeText = Styled.Text`
   font-size: 15px;

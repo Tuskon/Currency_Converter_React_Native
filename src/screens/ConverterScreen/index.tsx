@@ -22,13 +22,15 @@ import {
     InputRowView,
     TextInputCountry,
     ExchangeView,
+    ExchangeRow,
     ExchangeText,
     ExchangeBoldText
 } from './style';
 import { useConverterScreenViewModel } from './converter.vm';
-import { ActivityIndicator, Button, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, ActivityIndicator } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { CountryBottomSheet } from '@shared/CountryBottomSheet';
+import { maskValue } from '@utils/masks';
 
 export function ConverterScreen() {
 
@@ -37,7 +39,14 @@ export function ConverterScreen() {
         closeList,
         setItems,
         firstCountry,
-        secondCountry
+        secondCountry,
+        loadingFirst,
+        loadingSecond,
+        amountValue,
+        setAmountValue,
+        convertedValue,
+        setConvertedValue,
+        setIsEditingAmount
     } = useConverterScreenViewModel()
 
     return (
@@ -73,7 +82,17 @@ export function ConverterScreen() {
                                         </TouchableOpacity>
 
                                         <InputRowView>
-                                            <TextInputCountry placeholder={"0.00"}></TextInputCountry>
+                                            {loadingFirst ?
+                                                <ActivityIndicator size={20} color={'#6750A4'} />
+                                                :
+                                                <TextInputCountry
+                                                    value={amountValue ?? ""}
+                                                    onChangeText={(text) => {
+                                                        setIsEditingAmount(true)
+                                                        setAmountValue(maskValue(text));
+                                                    }}
+                                                    placeholder={"0.00"}></TextInputCountry>
+                                            }
                                         </InputRowView>
                                     </RowView>
                                 </ViewAmout>
@@ -106,7 +125,17 @@ export function ConverterScreen() {
                                         </TouchableOpacity>
 
                                         <InputRowView>
-                                            <TextInputCountry placeholder={"0.00"}></TextInputCountry>
+                                            {loadingSecond ?
+                                                <ActivityIndicator size={20} color={'#6750A4'} />
+                                                :
+                                                <TextInputCountry 
+                                                value={convertedValue ?? ""}
+                                                    onChangeText={(text) => {
+                                                        setIsEditingAmount(false)
+                                                        setConvertedValue(maskValue(text));
+                                                    }}
+                                                    placeholder={"0.00"}></TextInputCountry>
+                                            }
                                         </InputRowView>
 
                                     </RowView>
@@ -119,11 +148,24 @@ export function ConverterScreen() {
 
                         </InnerCardSelectionView>
                     </CardSelectionView>
-
-                    <ExchangeView>
-                        <ExchangeText>Indicative Exchange Rate</ExchangeText>
-                        <ExchangeBoldText>1 DDD = 1.36 DDD</ExchangeBoldText>
-                    </ExchangeView>
+                    {firstCountry !== null && secondCountry !== null &&
+                        <ExchangeView>
+                            <ExchangeText>Indicative Exchange Rate</ExchangeText>
+                            <ExchangeRow>
+                                {loadingFirst ?
+                                    <ActivityIndicator size={10} color={'#6750A4'} />
+                                    :
+                                    <ExchangeBoldText>{amountValue?.length?amountValue:'0.00'} {firstCountry?.currencies}</ExchangeBoldText>
+                                }
+                                <ExchangeBoldText> = </ExchangeBoldText>
+                                {loadingSecond ?
+                                    <ActivityIndicator size={10} color={'#6750A4'} />
+                                    :
+                                    <ExchangeBoldText>{convertedValue?.length?convertedValue:'0.00'} {secondCountry?.currencies}</ExchangeBoldText>
+                                }
+                            </ExchangeRow>
+                        </ExchangeView>
+                    }
 
                 </ScrollContent>
             </GeralContentView>

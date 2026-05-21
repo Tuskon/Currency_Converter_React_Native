@@ -18,7 +18,6 @@ export const useInitialScreenViewModel = () => {
     const navigation = useNavigation<any>();
 
     const goConverter = () => {
-        console.log("Log")
         navigation.navigate("ConverterScreen")
     }
 
@@ -32,12 +31,10 @@ export const useInitialScreenViewModel = () => {
             GetListCountrysRequestReducer,
             (response) => {
                 setListCountrys(response)
-                console.log(response)
                 setLoading(false)
                 dispatch(resetGetListCountrysRequest());
             },
             (statusCode, errorMessage) => {
-                console.log(errorMessage)
                 setLoading(false)
                 dispatch(resetGetListCountrysRequest());
             }, () => { }, false
