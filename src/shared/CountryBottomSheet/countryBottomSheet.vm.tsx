@@ -16,17 +16,12 @@ export const useCountryBottomSheetViewModel = () => {
   const [filteredCountries, setFilteredCountries] = useState<any[]>([]);
   const [search, setSearch] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-
   const [error, setError] = useState<boolean>(false);
 
   const getCountries = () => {
     dispatch(listCountrysRequest({}));
     setLoading(true);
     setError(false);
-  };
-
-  const retry = () => {
-    getCountries();
   };
 
   const updateSearch = (value: string) => {
@@ -77,6 +72,6 @@ export const useCountryBottomSheetViewModel = () => {
     search,
     filteredCountries,
     updateSearch,
-    retry,
+    getCountries
   };
 };

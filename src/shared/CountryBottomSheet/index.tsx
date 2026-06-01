@@ -23,13 +23,13 @@ import {
   Divider,
   LoadingView,
   ErrorView,
+  ErrorCloseView,
   ErrorTitle,
   ErrorSubtitle,
   RetryButton,
   RetryButtonText,
   Overlay,
-  BottomSheetContainer,
-  HandleBar,
+  BottomSheetContainer
 } from './style';
 
 import { useCountryBottomSheetViewModel } from './countryBottomSheet.vm';
@@ -37,12 +37,14 @@ import { useCountryBottomSheetViewModel } from './countryBottomSheet.vm';
 interface Props {
   visible: boolean;
   onClose: () => void;
+  onErrorRequestClose: () => void;
   onCountrySelected: (country: any) => void;
 }
 
 export function CountryBottomSheet({
   visible,
   onClose,
+  onErrorRequestClose,
   onCountrySelected,
 }: Props) {
 
@@ -52,7 +54,7 @@ export function CountryBottomSheet({
     search,
     filteredCountries,
     updateSearch,
-    retry,
+    getCountries
   } = useCountryBottomSheetViewModel();
 
   return (
@@ -67,9 +69,7 @@ export function CountryBottomSheet({
 
         <TouchableOpacity style={{ flex: 1, width: '100%' }} onPress={onClose} />
 
-        <BottomSheetContainer>
-
-          <HandleBar />
+        <BottomSheetContainer error={error}>
 
           {
             loading ? (
@@ -82,23 +82,22 @@ export function CountryBottomSheet({
               <GeralView>
 
                 <ErrorView>
+                  <ErrorCloseView>
+                    <TouchableOpacity onPress={onErrorRequestClose}>
+                      <Icon name="close" size={29} color={'black'} />
+                    </TouchableOpacity>
+                  </ErrorCloseView>
 
-                  <TouchableOpacity onPress={onClose}>
-                    <Icon name="close" size={24} color={'black'} />
-                  </TouchableOpacity>
-
-                  <Icon name="error-outline" size={60} color={'red'} />
+                  <Icon name="error-outline" size={80} color={'red'} />
 
                   <ErrorTitle>Failed to retrieve the country list</ErrorTitle>
 
                   <ErrorSubtitle>Try again ?</ErrorSubtitle>
 
-                  <TouchableOpacity onPress={retry}>
+                  <TouchableOpacity onPress={getCountries}>
                     <RetryButton>
 
                       <Icon name="rotate-left" size={24} color={'white'} />
-
-                      <RetryButtonText>Retry</RetryButtonText>
 
                     </RetryButton>
                   </TouchableOpacity>

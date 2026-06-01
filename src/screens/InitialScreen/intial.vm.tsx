@@ -7,19 +7,19 @@ import { useAppDispatch } from '@redux';
 import { listCountrysRequest } from '@redux/listCountrys/listCountrys.action';
 import { resetGetListCountrysRequest } from '@redux/listCountrys/listCountrys.store';
 import { ListCountryInteface } from '@redux/listCountrys/models/listCountrys.models';
+import { NavProps } from '@models/nav';
 
 export const useInitialScreenViewModel = () => {
 
     const dispatch = useAppDispatch();
     const { handlerReducer } = useContext(RequestContext)
     const GetListCountrysRequestReducer = useSelector((state: RootState) => state.getListCountrysRequest);
-    const [listCountrys,setListCountrys] = useState<ListCountryInteface[] | null>(null)
+    const [listCountrys, setListCountrys] = useState<ListCountryInteface[] | null>(null)
     const [loading, setLoading] = useState<boolean>(false)
-    const navigation = useNavigation<any>();
+    const { navigate } = useNavigation<NavProps>();
 
     const goConverter = () => {
-        console.log("Log")
-        navigation.navigate("ConverterScreen")
+        navigate("ConverterScreen")
     }
 
     const getList = () => {
@@ -32,12 +32,10 @@ export const useInitialScreenViewModel = () => {
             GetListCountrysRequestReducer,
             (response) => {
                 setListCountrys(response)
-                console.log(response)
                 setLoading(false)
                 dispatch(resetGetListCountrysRequest());
             },
             (statusCode, errorMessage) => {
-                console.log(errorMessage)
                 setLoading(false)
                 dispatch(resetGetListCountrysRequest());
             }, () => { }, false
