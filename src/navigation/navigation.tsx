@@ -15,7 +15,6 @@ function CurrencyNavigator() {
   );
 }
 
-
 export default function Navigator() {
 
   return (

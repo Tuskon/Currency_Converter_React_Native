@@ -31,6 +31,7 @@ import { TouchableOpacity, ActivityIndicator } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { CountryBottomSheet } from '@shared/CountryBottomSheet';
 import { maskValue } from '@utils/masks';
+import { ModalCurrencyError } from '@shared/ModalCurrencyError';
 
 export function ConverterScreen() {
 
@@ -46,7 +47,10 @@ export function ConverterScreen() {
         setAmountValue,
         convertedValue,
         setConvertedValue,
-        setIsEditingAmount
+        setIsEditingAmount,
+        isVisibleErrorCurrency,
+        handleErrorRequest,
+        refreshCurrencyRequest
     } = useConverterScreenViewModel()
 
     return (
@@ -128,8 +132,8 @@ export function ConverterScreen() {
                                             {loadingSecond ?
                                                 <ActivityIndicator size={20} color={'#6750A4'} />
                                                 :
-                                                <TextInputCountry 
-                                                value={convertedValue ?? ""}
+                                                <TextInputCountry
+                                                    value={convertedValue ?? ""}
                                                     onChangeText={(text) => {
                                                         setIsEditingAmount(false)
                                                         setConvertedValue(maskValue(text));
@@ -155,13 +159,13 @@ export function ConverterScreen() {
                                 {loadingFirst ?
                                     <ActivityIndicator size={10} color={'#6750A4'} />
                                     :
-                                    <ExchangeBoldText>{amountValue?.length?amountValue:'0.00'} {firstCountry?.currencies}</ExchangeBoldText>
+                                    <ExchangeBoldText>{amountValue?.length ? amountValue : '0.00'} {firstCountry?.currencies}</ExchangeBoldText>
                                 }
                                 <ExchangeBoldText> = </ExchangeBoldText>
                                 {loadingSecond ?
                                     <ActivityIndicator size={10} color={'#6750A4'} />
                                     :
-                                    <ExchangeBoldText>{convertedValue?.length?convertedValue:'0.00'} {secondCountry?.currencies}</ExchangeBoldText>
+                                    <ExchangeBoldText>{convertedValue?.length ? convertedValue : '0.00'} {secondCountry?.currencies}</ExchangeBoldText>
                                 }
                             </ExchangeRow>
                         </ExchangeView>
@@ -169,7 +173,8 @@ export function ConverterScreen() {
 
                 </ScrollContent>
             </GeralContentView>
-            <CountryBottomSheet visible={isVisibleCountryList} onClose={() => closeList()} onCountrySelected={(item) => setItems(item)} />
+            <CountryBottomSheet visible={isVisibleCountryList} onClose={() => closeList()} onCountrySelected={(item) => setItems(item)} onErrorRequestClose={() => handleErrorRequest()} />
+            <ModalCurrencyError visible={isVisibleErrorCurrency} onClose={() => handleErrorRequest()} onRetry={() => refreshCurrencyRequest()} />
         </GeralView>
 
     );

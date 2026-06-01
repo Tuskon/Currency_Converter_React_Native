@@ -7,6 +7,7 @@ import { useAppDispatch } from '@redux';
 import { currencyValueRequest } from '@redux/currencyValue/currencyValue.action';
 import { resetGetCurrencyValueRequest } from '@redux/currencyValue/currencyValue.store';
 import { Country } from '@models/country';
+import { NavProps } from '@models/nav';
 
 export const useConverterScreenViewModel = () => {
   const dispatch = useAppDispatch();
@@ -15,6 +16,7 @@ export const useConverterScreenViewModel = () => {
   const [loadingFirst, setLoadingFirst] = useState<boolean>(false);
   const [loadingSecond, setLoadingSecond] = useState<boolean>(false);
   const [isVisibleCountryList, setIsVisibleCountryList] = useState<boolean>(false)
+  const [isVisibleErrorCurrency, setVisibleErrorCurrency] = useState<boolean>(false)
   const [isForFirstCountry, setIsForFirstCountry] = useState<boolean | null>(null)
   const [firstCountry, setFirstCountry] = useState<Country | null>(null)
   const [secondCountry, setSecondCountry] = useState<Country | null>(null)
@@ -22,6 +24,7 @@ export const useConverterScreenViewModel = () => {
   const [amountValue, setAmountValue] = useState<string | null>(null);
   const [convertedValue, setConvertedValue] = useState<string | null>(null);
   const [isEditingAmount, setIsEditingAmount] = useState(true);
+  const { goBack } = useNavigation<NavProps>();
 
 
   const showList = (fisrtList: boolean) => {
@@ -89,6 +92,7 @@ export const useConverterScreenViewModel = () => {
         console.log(errorMessage);
         setLoadingFirst(false)
         setLoadingSecond(false)
+        setVisibleErrorCurrency(true)
         dispatch(resetGetCurrencyValueRequest());
       }, () => { }, false
     );
@@ -114,6 +118,25 @@ export const useConverterScreenViewModel = () => {
     }
   }, [amountValue, convertedValue, rateValue, isEditingAmount]);
 
+  const handleErrorRequest = () => {
+    setIsVisibleCountryList(false)
+    setVisibleErrorCurrency(false)
+    goBack()
+  }
+
+  const refreshCurrencyRequest = () => {
+    if (firstCountry && secondCountry) {
+      setVisibleErrorCurrency(false)
+      const params = {
+        firstCountry: firstCountry.currencies,
+        secondCountry: secondCountry.currencies
+      }
+      setLoadingFirst(true)
+      setLoadingSecond(true)
+      dispatch(currencyValueRequest(params))
+    }
+  }
+
   return {
     isVisibleCountryList,
     setIsVisibleCountryList,
@@ -128,6 +151,9 @@ export const useConverterScreenViewModel = () => {
     setAmountValue,
     convertedValue,
     setConvertedValue,
-    setIsEditingAmount
+    setIsEditingAmount,
+    isVisibleErrorCurrency,
+    handleErrorRequest,
+    refreshCurrencyRequest
   };
 };

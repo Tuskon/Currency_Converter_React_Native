@@ -1,31 +1,23 @@
 import Styled from 'styled-components/native';
 
+
+interface BottomSheetContainerProps {
+  error?: boolean;
+}
+
 export const Overlay = Styled.View`
   flex:1;
   background-color:rgba(0,0,0,0.35);
   justify-content:flex-end;
 `;
 
-export const BottomSheetContainer = Styled.View`
+export const BottomSheetContainer = Styled.View<BottomSheetContainerProps>`
   width:100%;
-  height:90%;
+  height:${((props: BottomSheetContainerProps) => props.error ? 40 : 90)}%;
   background-color:white;
-
   border-top-left-radius:28px;
   border-top-right-radius:28px;
-
   overflow:hidden;
-`;
-
-export const HandleBar = Styled.View`
-  width:60px;
-  height:6px;
-  border-radius:999px;
-  background-color:#D9D9D9;
-
-  align-self:center;
-  margin-top:12px;
-  margin-bottom:10px;
 `;
 
 export const GeralView = Styled.View`
@@ -35,11 +27,9 @@ export const GeralView = Styled.View`
 export const HeaderView = Styled.View`
   width:100%;
   padding-horizontal:20px;
-
   flex-direction:row;
   align-items:center;
   justify-content:space-between;
-
   margin-top:10px;
 `;
 
@@ -113,11 +103,18 @@ export const LoadingView = Styled.View`
 export const ErrorView = Styled.View`
   flex:1;
   align-items:center;
+  justify-content:flex-start;
+`;
+
+export const ErrorCloseView = Styled.View`
+  width:90%;
+  align-items:flex-end;
   justify-content:center;
+  margin-top:20px
 `;
 
 export const ErrorTitle = Styled.Text`
-  font-size:16px;
+  font-size:18px;
   font-weight:bold;
   color:black;
   margin-top:25px;
