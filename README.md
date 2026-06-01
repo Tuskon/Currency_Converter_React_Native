@@ -6,14 +6,6 @@
 
 <img src="./assets/img/Banner.jpg" alt="ConvY app banner" width="1000px">
 
-![GitHub repo size](https://img.shields.io/github/repo-size/Tuskon/Currency_Converter_React_Native?style=for-the-badge)
-
-![GitHub language count](https://img.shields.io/github/languages/count/Tuskon/Currency_Converter_React_Native?style=for-the-badge)
-
-![GitHub top language](https://img.shields.io/github/languages/top/Tuskon/Currency_Converter_React_Native?style=for-the-badge)
-
-![GitHub last commit](https://img.shields.io/github/last-commit/Tuskon/Currency_Converter_React_Native?style=for-the-badge)
-
 </div>
 
 ---
