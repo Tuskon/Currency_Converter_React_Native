@@ -1,97 +1,292 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+<div align="center">
 
-# Getting Started
+# 💱 ConvY
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+### Modern currency converter built with React Native + TypeScript
 
-## Step 1: Start Metro
+<img src="./assets/img/Banner.jpg" alt="ConvY app banner" width="1000px">
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+![GitHub repo size](https://img.shields.io/github/repo-size/Tuskon/Currency_Converter_React_Native?style=for-the-badge)
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+![GitHub language count](https://img.shields.io/github/languages/count/Tuskon/Currency_Converter_React_Native?style=for-the-badge)
 
-```sh
-# Using npm
-npm start
+![GitHub top language](https://img.shields.io/github/languages/top/Tuskon/Currency_Converter_React_Native?style=for-the-badge)
 
-# OR using Yarn
-yarn start
+![GitHub last commit](https://img.shields.io/github/last-commit/Tuskon/Currency_Converter_React_Native?style=for-the-badge)
+
+</div>
+
+---
+
+# 📖 About the Project
+
+ConvY is a cross-platform mobile application developed using React Native and TypeScript for performing real-time currency conversions.
+
+The project was built to explore modern mobile development concepts such as MVVM architecture, Redux state management, REST API consumption, reusable components, responsive interfaces, and scalable project organization.
+
+Users can select currencies, enter values, and instantly receive conversion results through a clean and intuitive interface.
+
+---
+
+# ✨ Features
+
+* 💱 Real-time currency conversion
+* 🌎 Multiple currency selection
+* ⚡ Fast and modern interface
+* 📱 Android and iOS support
+* 🔄 Dynamic conversion updates
+* 🎨 Responsive UI
+* 📦 Global state management with Redux
+* 🧩 Reusable component architecture
+* 🚨 Custom error handling
+* 🏗️ MVVM architecture
+
+---
+
+# 📱 Preview
+
+<div align="center">
+<img src="./assets/img/Android.png" alt="Application preview" width="200px">
+</div>
+
+---
+
+# 🛠️ Technologies Used
+
+## Mobile Development
+
+* React Native
+* TypeScript
+* React 19
+
+## Navigation
+
+* React Navigation
+* Native Stack Navigation
+
+## State Management
+
+* Redux Toolkit
+* React Redux
+* Context API
+
+## Networking
+
+* Axios
+
+## UI & Animations
+
+* Styled Components
+* React Native Reanimated
+* React Native Gesture Handler
+* React Native Linear Gradient
+* React Native Vector Icons
+
+## Development Tools
+
+* React Native CLI
+* Babel
+* Metro
+* ESLint
+* Jest
+
+---
+
+# 🏗️ Architecture
+
+The project follows the MVVM (Model-View-ViewModel) pattern, promoting better separation of concerns and maintainability.
+
+### Architecture Highlights
+
+* MVVM Pattern
+* Redux Global State Management
+* Context API
+* Component-Based Architecture
+* Service Layer Pattern
+* Reusable Components
+
+---
+
+# 📂 Project Structure
+
+```bash
+Currency_Converter
+ ┣ 📂 android
+ ┣ 📂 ios
+ ┣ 📂 src
+ ┃ ┣ 📂 config
+ ┃ ┣ 📂 contexts
+ ┃ ┣ 📂 models
+ ┃ ┣ 📂 navigation
+ ┃ ┣ 📂 redux
+ ┃ ┣ 📂 screens
+ ┃ ┣ 📂 shared
+ ┃ ┗ 📂 utils
+ ┣ 📄 App.tsx
+ ┣ 📄 package.json
+ ┣ 📄 tsconfig.json
+ ┗ 📄 README.md
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+# 💻 Requirements
+
+Before getting started, make sure you have installed:
+
+* Node.js 22+
+* React Native CLI
+* Android Studio
+* Android SDK
+* JDK 17+
+* Xcode (macOS only)
+* CocoaPods (iOS only)
+* Android Emulator or physical device
+
+---
+
+# 🚀 Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Tuskon/Currency_Converter.git
+```
+
+Navigate to the project folder:
+
+```bash
+cd Currency_Converter
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+For iOS (macOS only):
+
+```bash
+cd ios
+pod install
+cd ..
+```
+
+---
+
+# ☕ Running the Application
+
+Start Metro:
+
+```bash
+npm start
+```
+
+Open another terminal and run:
 
 ### Android
 
-```sh
-# Using npm
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
 ### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+If everything is configured correctly, the application will launch on your emulator or connected device.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+---
 
-## Step 3: Modify your app
+# 🔥 Generating APK
 
-Now that you have successfully run the app, let's make changes!
+Generate a debug APK:
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+```bash
+cd android
+gradlew assembleDebug
+```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+Generate a release APK:
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+```bash
+cd android
+gradlew assembleRelease
+```
 
-## Congratulations! :tada:
+APK output location:
 
-You've successfully run and modified your React Native App. :partying_face:
+```bash
+android/app/build/outputs/apk/
+```
 
-### Now what?
+---
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+# 📦 Main Dependencies
 
-# Troubleshooting
+```json
+{
+  "@react-navigation/native": "^7.2.4",
+  "@react-navigation/native-stack": "^7.15.1",
+  "@reduxjs/toolkit": "^2.12.0",
+  "react-redux": "^9.3.0",
+  "axios": "^1.16.1",
+  "styled-components": "^6.4.1",
+  "react-native-reanimated": "^4.3.1",
+  "react-native-gesture-handler": "^2.31.2",
+  "react-native-linear-gradient": "^2.8.3",
+  "react-native-vector-icons": "^10.3.0"
+}
+```
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+---
 
-# Learn More
+# 🧠 Applied Concepts
 
-To learn more about React Native, take a look at the following resources:
+* MVVM Architecture
+* Redux State Management
+* Context API
+* REST API Consumption
+* API Abstraction Layer
+* Component-Based Architecture
+* TypeScript Typing
+* Responsive UI Design
+* Reusable Components
+* Navigation Between Screens
+* Error Handling
+* Mobile Performance Optimization
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+---
+
+# 👨‍💻 Author
+
+<div align="center">
+
+<a href="https://github.com/Tuskon">
+  <img src="https://github.com/Tuskon.png" width="120px;" alt="Author photo"/>
+</a>
+
+### José Luiz
+
+Software Engineer | Mobile Developer
+
+</div>
+
+---
+
+# ⭐ Support the Project
+
+If this project helped you or inspired you, consider giving it a star ⭐ on GitHub.
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
+
+Feel free to use, modify, and distribute it.
+
+---
