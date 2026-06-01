@@ -80,7 +80,6 @@ Users can select currencies, enter values, and instantly receive conversion resu
 * Babel
 * Metro
 * ESLint
-* Jest
 
 ---
 
